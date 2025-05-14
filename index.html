@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="zh-CN">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -42,7 +43,7 @@
             background-color: white;
             padding: 20px;
             border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             text-align: center;
             transition: transform 0.2s;
         }
@@ -110,7 +111,11 @@
             background: white;
             padding: 10px;
             border-radius: 4px;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
+        .parking-sector1 {
+            position: absolute;
+            padding: 10px;
         }
 
         .current-location {
@@ -136,17 +141,19 @@
             .parking-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
+
             .navigation-map {
                 flex-direction: column;
             }
         }
     </style>
 </head>
+
 <body>
     <div class="container">
         <div class="header">
             <h1>智慧停车场管理系统</h1>
-            <p>当前剩余车位：<span id="空闲Count">0</span></p >
+            <p>当前剩余车位：<span id="空闲Count">0</span></p>
         </div>
 
         <div class="search-box">
@@ -154,7 +161,7 @@
             <button onclick="searchCar()">查询</button>
         </div>
         <div class="search-box2">
-            
+
         </div>
 
         <div class="parking-grid" id="parkingGrid">
@@ -167,9 +174,10 @@
             <div class="navigation-map">
                 <div class="parking-layout" id="parkingMap">
                     <div class="pathway" style="width: 95%; height: 40px; top: 20px;"></div>
-                    <div class="pathway" style="width: 40px; height: 260px; left: 50%;"></div>
-                    <div class="parking-sector" style="top: 70px; left: 30px;">A区</div>
-                    <div class="parking-sector" style="top: 70px; right: 45px;">B区</div>
+                    <div class="pathway" style="width: 40px; height: 260px; left: 47%;"></div>
+                    <div class="parking-sector1" style="top: 18px; left: 18px;">入口</div>
+                    <div class="parking-sector" style="top: 70px; left: 200px;">A区</div>
+                    <div class="parking-sector" style="top: 70px; right: 200px;">B区</div>
                 </div>
                 <div class="navigation-steps" id="navigationSteps">
                     <!-- 导航步骤将在此显示 -->
@@ -222,28 +230,28 @@
             }
         }
 
-        
+
 
 
         // 导航数据
         const navigationData = {
-            'A001': { steps: ["1. 入口直行50米", "2. 第一个路口右转", "3. 通道右侧第一个车位"], position: { x: '42%', y: '85px' }},
-            'A002': { steps: ["1. 入口直行50米", "2. 第一个路口右转", "3. 通道右侧第二个车位"], position: { x: '42%', y: '120px' }},
-            'A003': { steps: ["1. 入口直行50米", "2. 第一个路口右转", "3. 通道右侧第三个车位"], position: { x: '42%', y: '155px' }},
-            'A004': { steps: ["1. 入口直行50米", "2. 第一个路口右转", "3. 通道右侧第四个车位"], position: { x: '42%', y: '190px' }},
-            'A005': { steps: ["1. 入口直行50米", "2. 第一个路口右转", "3. 通道右侧第五个车位"], position: { x: '42%', y: '225px' }},
-            'B001': { steps: ["1. 入口直行50米", "2. 第一个路口右转", "3. 通道左侧第一个车位"], position: { x: '56%', y: '85px' }},
-            'B002': { steps: ["1. 入口直行50米", "2. 第一个路口右转", "3. 通道左侧第二个车位"], position: { x: '56%', y: '120px' }},
-            'B003': { steps: ["1. 入口直行50米", "2. 第一个路口右转", "3. 通道左侧第三个车位"], position: { x: '56%', y: '155px' }},
-            'B004': { steps: ["1. 入口直行50米", "2. 第一个路口右转", "3. 通道左侧第四个车位"], position: { x: '56%', y: '190px' }},
-            'B005': { steps: ["1. 入口直行50米", "2. 第一个路口右转", "3. 通道左侧第五个车位"], position: { x: '56%', y: '225px' }}
+            'A001': { steps: ["1. 入口直行50米", "2. 第一个路口右转", "3. 通道右侧第一个车位"], position: { x: '39%', y: '85px' } },
+            'A002': { steps: ["1. 入口直行50米", "2. 第一个路口右转", "3. 通道右侧第二个车位"], position: { x: '39%', y: '120px' } },
+            'A003': { steps: ["1. 入口直行50米", "2. 第一个路口右转", "3. 通道右侧第三个车位"], position: { x: '39%', y: '155px' } },
+            'A004': { steps: ["1. 入口直行50米", "2. 第一个路口右转", "3. 通道右侧第四个车位"], position: { x: '39%', y: '190px' } },
+            'A005': { steps: ["1. 入口直行50米", "2. 第一个路口右转", "3. 通道右侧第五个车位"], position: { x: '39%', y: '225px' } },
+            'B001': { steps: ["1. 入口直行50米", "2. 第一个路口右转", "3. 通道左侧第一个车位"], position: { x: '53%', y: '85px' } },
+            'B002': { steps: ["1. 入口直行50米", "2. 第一个路口右转", "3. 通道左侧第二个车位"], position: { x: '53%', y: '120px' } },
+            'B003': { steps: ["1. 入口直行50米", "2. 第一个路口右转", "3. 通道左侧第三个车位"], position: { x: '53%', y: '155px' } },
+            'B004': { steps: ["1. 入口直行50米", "2. 第一个路口右转", "3. 通道左侧第四个车位"], position: { x: '53%', y: '190px' } },
+            'B005': { steps: ["1. 入口直行50米", "2. 第一个路口右转", "3. 通道左侧第五个车位"], position: { x: '53%', y: '225px' } }
         };
 
         // 初始化停车场
         function initParking() {
             const grid = document.getElementById('parkingGrid');
             grid.innerHTML = '';
-            
+
             parkingSpaces.forEach(space => {
                 const div = document.createElement('div');
                 div.className = `parking-space ${space.status}`;
@@ -320,4 +328,5 @@
         window.onload = initParking;
     </script>
 </body>
+
 </html>
