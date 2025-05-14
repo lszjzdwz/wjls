@@ -47,12 +47,12 @@
             transition: transform 0.2s;
         }
 
-        .available {
+        .空闲 {
             background-color: #2ecc71;
             color: white;
         }
 
-        .occupied {
+        .已占 {
             background-color: #e74c3c;
             color: white;
         }
@@ -146,12 +146,15 @@
     <div class="container">
         <div class="header">
             <h1>智慧停车场管理系统</h1>
-            <p>当前剩余车位：<span id="availableCount">0</span></p >
+            <p>当前剩余车位：<span id="空闲Count">0</span></p >
         </div>
 
         <div class="search-box">
             <input type="text" id="searchInput" placeholder="输入车牌号查询">
             <button onclick="searchCar()">查询</button>
+        </div>
+        <div class="search-box2">
+            
         </div>
 
         <div class="parking-grid" id="parkingGrid">
@@ -163,8 +166,8 @@
             <div id="navigationInfo"></div>
             <div class="navigation-map">
                 <div class="parking-layout" id="parkingMap">
-                    <div class="pathway" style="width: 90%; height: 40px; top: 20px;"></div>
-                    <div class="pathway" style="width: 40px; height: 85%; left: 350px;"></div>
+                    <div class="pathway" style="width: 95%; height: 40px; top: 20px;"></div>
+                    <div class="pathway" style="width: 40px; height: 260px; left: 50%;"></div>
                     <div class="parking-sector" style="top: 70px; left: 30px;">A区</div>
                     <div class="parking-sector" style="top: 70px; right: 45px;">B区</div>
                 </div>
@@ -178,31 +181,31 @@
         // 停车场数据（10个车位）
         let parkingSpaces = [
             // A区
-            { id: 'A001', status: 'available', license: '' },
-            { id: 'A002', status: 'available', license: '' },
-            { id: 'A003', status: 'available', license: '' },
-            { id: 'A004', status: 'available', license: '' },
-            { id: 'A005', status: 'available', license: '' },
+            { id: 'A001', status: '空闲', license: '' },
+            { id: 'A002', status: '空闲', license: '' },
+            { id: 'A003', status: '空闲', license: '' },
+            { id: 'A004', status: '空闲', license: '' },
+            { id: 'A005', status: '空闲', license: '' },
             // B区
-            { id: 'B001', status: 'available', license: '' },
-            { id: 'B002', status: 'available', license: '' },
-            { id: 'B003', status: 'available', license: '' },
-            { id: 'B004', status: 'available', license: '' },
-            { id: 'B005', status: 'available', license: '' }
+            { id: 'B001', status: '空闲', license: '' },
+            { id: 'B002', status: '空闲', license: '' },
+            { id: 'B003', status: '空闲', license: '' },
+            { id: 'B004', status: '空闲', license: '' },
+            { id: 'B005', status: '空闲', license: '' }
         ];
 
         // 导航数据
         const navigationData = {
-            'A001': { steps: ["1. 入口直行50米", "2. 第一个路口右转", "3. 通道右侧第一个车位"], position: { x: '280px', y: '85px' }},
-            'A002': { steps: ["1. 入口直行50米", "2. 第一个路口右转", "3. 通道右侧第二个车位"], position: { x: '280px', y: '120px' }},
-            'A003': { steps: ["1. 入口直行50米", "2. 第一个路口右转", "3. 通道右侧第三个车位"], position: { x: '280px', y: '155px' }},
-            'A004': { steps: ["1. 入口直行50米", "2. 第一个路口右转", "3. 通道右侧第四个车位"], position: { x: '280px', y: '190px' }},
-            'A005': { steps: ["1. 入口直行50米", "2. 第一个路口右转", "3. 通道右侧第五个车位"], position: { x: '280px', y: '225px' }},
-            'B001': { steps: ["1. 入口直行50米", "2. 第一个路口右转", "3. 通道左侧第一个车位"], position: { x: '50%', y: '85px' }},
-            'B002': { steps: ["1. 入口直行50米", "2. 第一个路口右转", "3. 通道左侧第二个车位"], position: { x: '50%', y: '120px' }},
-            'B003': { steps: ["1. 入口直行50米", "2. 第一个路口右转", "3. 通道左侧第三个车位"], position: { x: '50%', y: '155px' }},
-            'B004': { steps: ["1. 入口直行50米", "2. 第一个路口右转", "3. 通道左侧第四个车位"], position: { x: '50%', y: '190px' }},
-            'B005': { steps: ["1. 入口直行50米", "2. 第一个路口右转", "3. 通道左侧第五个车位"], position: { x: '50%', y: '225px' }}
+            'A001': { steps: ["1. 入口直行50米", "2. 第一个路口右转", "3. 通道右侧第一个车位"], position: { x: '42%', y: '85px' }},
+            'A002': { steps: ["1. 入口直行50米", "2. 第一个路口右转", "3. 通道右侧第二个车位"], position: { x: '42%', y: '120px' }},
+            'A003': { steps: ["1. 入口直行50米", "2. 第一个路口右转", "3. 通道右侧第三个车位"], position: { x: '42%', y: '155px' }},
+            'A004': { steps: ["1. 入口直行50米", "2. 第一个路口右转", "3. 通道右侧第四个车位"], position: { x: '42%', y: '190px' }},
+            'A005': { steps: ["1. 入口直行50米", "2. 第一个路口右转", "3. 通道右侧第五个车位"], position: { x: '42%', y: '225px' }},
+            'B001': { steps: ["1. 入口直行50米", "2. 第一个路口右转", "3. 通道左侧第一个车位"], position: { x: '56%', y: '85px' }},
+            'B002': { steps: ["1. 入口直行50米", "2. 第一个路口右转", "3. 通道左侧第二个车位"], position: { x: '56%%', y: '120px' }},
+            'B003': { steps: ["1. 入口直行50米", "2. 第一个路口右转", "3. 通道左侧第三个车位"], position: { x: '56%%', y: '155px' }},
+            'B004': { steps: ["1. 入口直行50米", "2. 第一个路口右转", "3. 通道左侧第四个车位"], position: { x: '56%%', y: '190px' }},
+            'B005': { steps: ["1. 入口直行50米", "2. 第一个路口右转", "3. 通道左侧第五个车位"], position: { x: '56%%', y: '225px' }}
         };
 
         // 初始化停车场
@@ -222,29 +225,29 @@
                 grid.appendChild(div);
             });
 
-            updateAvailableCount();
+            update空闲Count();
         }
 
         // 切换车位状态（仅保留可用/占用）
         function toggleSpaceStatus(spaceId) {
             const space = parkingSpaces.find(s => s.id === spaceId);
-            if (space.status === 'available') {
+            if (space.status === '空闲') {
                 const license = prompt('请输入车牌号：');
                 if (license) {
-                    space.status = 'occupied';
+                    space.status = '已占';
                     space.license = license;
                 }
             } else {
-                space.status = 'available';
+                space.status = '空闲';
                 space.license = '';
             }
             initParking();
         }
 
         // 更新可用车位数
-        function updateAvailableCount() {
-            const count = parkingSpaces.filter(s => s.status === 'available').length;
-            document.getElementById('availableCount').textContent = count;
+        function update空闲Count() {
+            const count = parkingSpaces.filter(s => s.status === '空闲').length;
+            document.getElementById('空闲Count').textContent = count;
         }
 
         // 车辆查询与导航
