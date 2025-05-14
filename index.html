@@ -193,6 +193,37 @@
             { id: 'B004', status: '空闲', license: '' },
             { id: 'B005', status: '空闲', license: '' }
         ];
+        // 新增导航显示函数
+        function showNavigationForSpace(spaceId) {
+            const space = parkingSpaces.find(s => s.id === spaceId);
+            if (!space) return;
+
+            const infoDiv = document.getElementById('navigationInfo');
+            const stepsDiv = document.getElementById('navigationSteps');
+            const mapDiv = document.getElementById('parkingMap');
+
+            mapDiv.querySelectorAll('.current-location').forEach(e => e.remove());
+
+            infoDiv.innerHTML = `
+                <p>车牌号：${space.license}</p >
+                <p>停车位置：${space.id}</p >
+            `;
+
+            if (navigationData[space.id]) {
+                const nav = navigationData[space.id];
+                stepsDiv.innerHTML = nav.steps.map(s => `<div class="step">${s}</div>`).join('');
+
+                const marker = document.createElement('div');
+                marker.className = 'parking-sector current-location';
+                marker.style.left = nav.position.x;
+                marker.style.top = nav.position.y;
+                marker.textContent = space.id;
+                mapDiv.appendChild(marker);
+            }
+        }
+
+        
+
 
         // 导航数据
         const navigationData = {
@@ -228,7 +259,7 @@
             update空闲Count();
         }
 
-        // 切换车位状态（仅保留可用/占用）
+        // 修改后的车位状态切换函数
         function toggleSpaceStatus(spaceId) {
             const space = parkingSpaces.find(s => s.id === spaceId);
             if (space.status === '空闲') {
@@ -236,12 +267,14 @@
                 if (license) {
                     space.status = '已占';
                     space.license = license;
+                    initParking();
+                    showNavigationForSpace(spaceId); // 新增导航调用
                 }
             } else {
                 space.status = '空闲';
                 space.license = '';
+                initParking();
             }
-            initParking();
         }
 
         // 更新可用车位数
